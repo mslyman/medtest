@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Test</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module">
+        import { Navbar } from './components/navbar.js';
+        import { MainTemplate } from './templates/main-template.js';
+        import { UserList } from './components/userlist.js';
+        import { User } from './components/user.js';
+        Vue.use(VueRouter);
+
+        const router = new VueRouter({
+            routes: [
+                {
+                    path: '/',
+                    component: UserList,
+                    name: "list"
+                },
+                {
+                    path: '/user',
+                    component: User,
+                    name: "newUser"
+                },
+                {
+                    path: '/user/:id',
+                    component: User,
+                    name: 'userById',
+                    props: true
+                }]
+        });
+
+        new Vue({
+            el: '#app',
+            components: {
+                'navbar': Navbar
+            },
+            vuetify: new Vuetify({
+                icons: {
+                    iconfont: 'fa'
+                }
+            }),
+            router,
+            template: MainTemplate
+        });
+
+    </script>
+</body>
+
+</html>
